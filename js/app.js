@@ -31,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements - Browse Mode
     const landscapeControls = document.getElementById('landscape-controls');
     const backToSearch = document.getElementById('back-to-search');
+    const expandAllBtn = document.getElementById('expand-all');
+    const collapseAllBtn = document.getElementById('collapse-all');
     const statsBar = document.getElementById('stats-bar');
     const landscape = document.getElementById('landscape');
     const trackButtons = document.querySelectorAll('.track-btn');
@@ -280,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (filteredSubcategories.length === 0) return null;
 
         const categoryEl = document.createElement('div');
-        categoryEl.className = 'category';
+        categoryEl.className = 'category collapsed';
         categoryEl.dataset.track = track;
 
         const toolCount = filteredSubcategories.reduce((sum, sub) => sum + sub.tools.length, 0);
@@ -425,6 +427,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Back to search
         backToSearch.addEventListener('click', () => switchMode('action'));
+
+        // Expand all categories
+        expandAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('.category.collapsed').forEach(cat => {
+                cat.classList.remove('collapsed');
+            });
+            // Switch to columns layout for dense packing
+            landscape.classList.add('all-expanded');
+        });
+
+        // Collapse all categories
+        collapseAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('.category:not(.collapsed)').forEach(cat => {
+                cat.classList.add('collapsed');
+            });
+            // Switch back to flex layout for uniform boxes
+            landscape.classList.remove('all-expanded');
+        });
 
         // Track toggle (browse mode)
         trackButtons.forEach(btn => {

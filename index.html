@@ -4,27 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Tool Review - Find the Right AI Tool for the Job</title>
-    <!-- Google Analytics - DISABLED until privacy policy is ready
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MZE53DJ7JP"></script>
+    <!-- Google Consent Mode - Set defaults BEFORE loading any Google scripts -->
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
+
+        // Default: deny all until user consents
+        gtag('consent', 'default', {
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'analytics_storage': 'denied',
+            'wait_for_update': 500
+        });
+
+        // Check for existing consent
+        const savedConsent = localStorage.getItem('cookie_consent');
+        if (savedConsent === 'accepted') {
+            gtag('consent', 'update', {
+                'ad_storage': 'granted',
+                'ad_user_data': 'granted',
+                'ad_personalization': 'granted',
+                'analytics_storage': 'granted'
+            });
+        }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MZE53DJ7JP"></script>
+    <script>
         gtag('js', new Date());
         gtag('config', 'G-MZE53DJ7JP');
     </script>
-    -->
+
     <meta name="description" content="Explore 330+ AI tools organized by category. Find foundation models, coding assistants, agents, and more. Your starting point for AI tool discovery.">
     <meta property="og:title" content="AI Tool Review">
     <meta property="og:description" content="Find the right AI tool for the job. Explore 330+ tools across 15+ categories.">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#1e1e1e">
     <link rel="stylesheet" href="css/style.css">
-    <!-- Google AdSense - Non-personalized ads only (no tracking cookies) -->
+
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7272761067250869"
         crossorigin="anonymous"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).requestNonPersonalizedAds = 1;
-    </script>
 </head>
 <body>
     <!-- Header -->
@@ -59,7 +81,7 @@
             <button class="action-chip" data-query="voice synthesis tts">Voice Synthesis</button>
             <button class="action-chip" data-query="code assistant">Code Assistant</button>
         </div>
-        <button class="browse-toggle" id="browse-toggle">Browse All 330+ Tools</button>
+        <button class="browse-toggle" id="browse-toggle">Browse The AI Tools Landscape</button>
     </section>
 
     <!-- Search Results - Flat Grid (Hidden by default) -->
@@ -76,6 +98,10 @@
     <!-- Landscape Mode Controls (Hidden by default) -->
     <section class="controls hidden" id="landscape-controls">
         <button class="back-to-search" id="back-to-search">Back to Search</button>
+        <div class="expand-collapse-btns">
+            <button class="expand-btn" id="expand-all">Expand All</button>
+            <button class="collapse-btn" id="collapse-all">Collapse All</button>
+        </div>
         <div class="track-toggle">
             <button class="track-btn active" data-track="all">All Tools</button>
             <button class="track-btn" data-track="users">For Users</button>
@@ -120,7 +146,7 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>AI Tool Review</h3>
-                <p>Your guide to AI tools. Community reviews and ratings coming soon. Inspired by the <a href="https://landscape.cncf.io/" target="_blank">CNCF Landscape</a>.</p>
+                <p>Your guide to AI tools. Community reviews and ratings coming soon.</p>
             </div>
             <div class="footer-section">
                 <h3>Legend</h3>
@@ -132,9 +158,9 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 AI Tool Review. Community-curated.</p>
+            <p>&copy; 2026 AI Tool Review. Community-curated. | <a href="privacy.html">Privacy Policy</a></p>
         </div>
-        <!-- Ad Section - Non-personalized ads -->
+        <!-- Ad Section -->
         <div class="footer-ad">
             <ins class="adsbygoogle"
                 style="display:inline-block;width:320px;height:50px"
@@ -151,5 +177,56 @@
 
     <script src="js/data.js"></script>
     <script src="js/app.js"></script>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent" class="cookie-banner" style="display: none;">
+        <div class="cookie-content">
+            <p>We use cookies for analytics and personalized ads. By clicking "Accept", you consent to our use of cookies. <a href="privacy.html">Privacy Policy</a></p>
+            <div class="cookie-buttons">
+                <button id="cookie-reject" class="cookie-btn cookie-btn-secondary">Reject</button>
+                <button id="cookie-accept" class="cookie-btn cookie-btn-primary">Accept</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cookie Consent Handler
+        (function() {
+            const banner = document.getElementById('cookie-consent');
+            const acceptBtn = document.getElementById('cookie-accept');
+            const rejectBtn = document.getElementById('cookie-reject');
+
+            // Show banner if no consent saved
+            if (!localStorage.getItem('cookie_consent')) {
+                banner.style.display = 'block';
+            }
+
+            acceptBtn.addEventListener('click', function() {
+                localStorage.setItem('cookie_consent', 'accepted');
+                banner.style.display = 'none';
+
+                // Update Google Consent Mode
+                gtag('consent', 'update', {
+                    'ad_storage': 'granted',
+                    'ad_user_data': 'granted',
+                    'ad_personalization': 'granted',
+                    'analytics_storage': 'granted'
+                });
+            });
+
+            rejectBtn.addEventListener('click', function() {
+                localStorage.setItem('cookie_consent', 'rejected');
+                banner.style.display = 'none';
+
+                // Keep consent denied (already default)
+                gtag('consent', 'update', {
+                    'ad_storage': 'denied',
+                    'ad_user_data': 'denied',
+                    'ad_personalization': 'denied',
+                    'analytics_storage': 'denied'
+                });
+            });
+        })();
+    </script>
 </body>
 </html>
