@@ -56,6 +56,66 @@
     --transition: all 0.15s ease;
 }
 
+/* Prevent Google Auto Ads from breaking layout */
+ins.adsbygoogle {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Ensure auto-inserted ad containers don't break flexbox/grid layouts */
+.landscape > ins.adsbygoogle,
+.controls > ins.adsbygoogle,
+.hero > ins.adsbygoogle,
+.stats-bar > ins.adsbygoogle,
+.header > ins.adsbygoogle,
+.controls-search-row > ins.adsbygoogle,
+.controls-toolbar > ins.adsbygoogle {
+    display: none !important;
+}
+
+/* Contain any injected ad iframes */
+ins.adsbygoogle[data-ad-status] {
+    max-height: 250px;
+}
+
+/* Prevent auto-ad wrappers from affecting main content flow */
+body > ins.adsbygoogle,
+body > div[id^="google_ads"],
+body > div[class*="adsbygoogle"],
+body > aside,
+body > div:not(.cookie-banner):not(#tooltip) > ins.adsbygoogle {
+    position: fixed !important;
+    z-index: -1 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Only show ads in designated footer area */
+.footer-ad ins.adsbygoogle {
+    position: static !important;
+    z-index: auto !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Ensure main content sections maintain their layout (when visible) */
+.hero:not(.hidden), .controls:not(.hidden), .stats-bar:not(.hidden), .landscape:not(.hidden), .search-results:not(.hidden) {
+    display: flex;
+}
+
+.hero:not(.hidden) {
+    flex-direction: column;
+}
+
+.controls:not(.hidden) {
+    flex-direction: column;
+}
+
+.landscape:not(.hidden) {
+    flex-wrap: wrap;
+}
+
 /* Reset & Base */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -1059,8 +1119,13 @@ a:hover {
     transform: translateY(-50%);
     width: 20px;
     height: 20px;
+    min-width: 20px;
+    max-width: 20px;
+    min-height: 20px;
+    max-height: 20px;
     color: var(--vscode-text-muted);
     pointer-events: none;
+    flex-shrink: 0;
 }
 
 .action-input {
@@ -1197,6 +1262,10 @@ a:hover {
 .landscape-search-icon {
     width: 20px;
     height: 20px;
+    min-width: 20px;
+    max-width: 20px;
+    min-height: 20px;
+    max-height: 20px;
     color: var(--vscode-text-muted);
     flex-shrink: 0;
 }
