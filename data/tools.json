@@ -370,6 +370,36 @@
               "url": "https://www.sudowrite.com/",
               "desc": "Fiction writing",
               "type": "commercial"
+            },
+            {
+              "name": "Surfer SEO",
+              "url": "https://surferseo.com/",
+              "desc": "SEO content optimization",
+              "type": "commercial"
+            },
+            {
+              "name": "Writesonic",
+              "url": "https://writesonic.com/",
+              "desc": "SEO blog content at scale",
+              "type": "commercial"
+            },
+            {
+              "name": "QuillBot",
+              "url": "https://quillbot.com/",
+              "desc": "Paraphrasing and rewriting",
+              "type": "commercial"
+            },
+            {
+              "name": "Wordtune",
+              "url": "https://www.wordtune.com/",
+              "desc": "Sentence-level rewrites",
+              "type": "commercial"
+            },
+            {
+              "name": "Rytr",
+              "url": "https://rytr.me/",
+              "desc": "Budget AI writer",
+              "type": "commercial"
             }
           ]
         }
@@ -867,6 +897,18 @@
               "url": "https://www.workday.com/en-us/artificial-intelligence/illuminate.html",
               "desc": "HR/finance AI",
               "type": "commercial"
+            },
+            {
+              "name": "DataRobot",
+              "url": "https://www.datarobot.com/",
+              "desc": "Enterprise AI/ML platform",
+              "type": "commercial"
+            },
+            {
+              "name": "Databricks",
+              "url": "https://www.databricks.com/",
+              "desc": "Data & AI lakehouse platform",
+              "type": "commercial"
             }
           ]
         }
@@ -1156,6 +1198,12 @@
               "url": "https://roocode.com/",
               "desc": "Cline fork with extensions",
               "type": "oss"
+            },
+            {
+              "name": "Kodo",
+              "url": "https://kodo.ai/",
+              "desc": "AI coding assistant (Claude Code-like)",
+              "type": "commercial"
             }
           ]
         },
@@ -2008,6 +2056,12 @@
               "url": "https://portkey.ai/",
               "desc": "Gateway, routing, observability",
               "type": "commercial"
+            },
+            {
+              "name": "impala AI",
+              "url": "https://impala.ai/",
+              "desc": "AI gateway, inference optimization",
+              "type": "commercial"
             }
           ]
         }
@@ -2563,6 +2617,36 @@
               "url": "https://wandb.ai/site/weave",
               "desc": "Weights & Biases LLM",
               "type": "commercial"
+            },
+            {
+              "name": "Maxim AI",
+              "url": "https://www.getmaxim.ai/",
+              "desc": "Agent simulations, framework-agnostic",
+              "type": "commercial"
+            },
+            {
+              "name": "arato.ai",
+              "url": "https://arato.ai/",
+              "desc": "User simulation, prompt engineering, evaluation",
+              "type": "commercial"
+            },
+            {
+              "name": "Plurai",
+              "url": "https://www.plurai.ai/",
+              "desc": "Production agent observability",
+              "type": "commercial"
+            },
+            {
+              "name": "WhyLabs",
+              "url": "https://whylabs.ai/",
+              "desc": "Data and AI observability platform",
+              "type": "commercial"
+            },
+            {
+              "name": "Avon AI",
+              "url": "https://www.avon-ai.com/",
+              "desc": "GenAI agent monitoring, security & compliance",
+              "type": "commercial"
             }
           ]
         },
@@ -2610,6 +2694,30 @@
               "name": "TruLens",
               "url": "https://www.trulens.org/",
               "desc": "OSS feedback functions",
+              "type": "oss"
+            },
+            {
+              "name": "Galileo",
+              "url": "https://www.rungalileo.io/",
+              "desc": "LLM evaluation and observability",
+              "type": "commercial"
+            },
+            {
+              "name": "Openlayer",
+              "url": "https://www.openlayer.com/",
+              "desc": "Tests for prompt injection, PII, hallucinations",
+              "type": "commercial"
+            },
+            {
+              "name": "Giskard",
+              "url": "https://www.giskard.ai/",
+              "desc": "ML/LLM testing, QA, and safety",
+              "type": "oss"
+            },
+            {
+              "name": "AgentBench",
+              "url": "https://github.com/THUDM/AgentBench",
+              "desc": "Research benchmark suite for LLM agents",
               "type": "oss"
             }
           ]
@@ -2743,6 +2851,12 @@
               "url": "https://signoz.io/",
               "desc": "OSS observability platform (OTel + ClickHouse)",
               "type": "oss"
+            },
+            {
+              "name": "Komodor",
+              "url": "https://komodor.com/",
+              "desc": "Kubernetes troubleshooting and observability",
+              "type": "commercial"
             }
           ]
         }

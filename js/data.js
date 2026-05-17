@@ -1521,6 +1521,24 @@ const landscapeData = {
                     ]
                 },
                 {
+                    "id": "agent-platforms",
+                    "name": "Agent Platforms",
+                    "tools": [
+                        {
+                            "name": "Overcut",
+                            "url": "https://overcut.ai/",
+                            "desc": "Agentic SDLC automation; PR reviews, ticket triage",
+                            "type": "commercial"
+                        },
+                        {
+                            "name": "xpander.ai",
+                            "url": "https://xpander.ai/",
+                            "desc": "Enterprise agent platform; multi-framework, multi-model",
+                            "type": "commercial"
+                        }
+                    ]
+                },
+                {
                     "id": "browser-agents",
                     "name": "Browser & Web Agents",
                     "tools": [
@@ -1927,6 +1945,12 @@ const landscapeData = {
                             "url": "https://cloud.google.com/vertex-ai",
                             "desc": "Google's ML platform",
                             "type": "commercial"
+                        },
+                        {
+                            "name": "llama.cpp",
+                            "url": "https://github.com/ggml-org/llama.cpp",
+                            "desc": "LLM inference in C/C++; runs on CPU/GPU",
+                            "type": "oss"
                         },
                         {
                             "name": "vLLM",

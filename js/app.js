@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentTrack = 'all';
     let currentType = 'all';
     let searchQuery = '';
+    let landscapeSearchQuery = '';
     let currentMode = 'action'; // 'action' or 'browse'
 
     // Format star count (e.g., 15400 -> "15.4k")
@@ -18,6 +19,54 @@ document.addEventListener('DOMContentLoaded', () => {
         return count.toString();
     }
 
+    // Simple stemmer to handle common word endings
+    function stem(word) {
+        if (word.length < 4) return word;
+
+        // Order matters - check longer suffixes first
+        const suffixes = [
+            'ation', 'ition', 'ement', 'ment', 'ness', 'able', 'ible',
+            'ting', 'sing', 'ing', 'tion', 'sion',
+            'ies', 'ied', 'ier',
+            'es', 'ed', 'er', 'ly', 's'
+        ];
+
+        for (const suffix of suffixes) {
+            if (word.endsWith(suffix) && word.length - suffix.length >= 3) {
+                return word.slice(0, -suffix.length);
+            }
+        }
+        return word;
+    }
+
+    // Check if two words match (including stem matching)
+    function wordsMatch(queryWord, targetWord) {
+        // Exact substring match
+        if (targetWord.includes(queryWord)) return true;
+
+        // Stem-based matching
+        const queryStem = stem(queryWord);
+        const targetStem = stem(targetWord);
+
+        // Stems match exactly
+        if (queryStem === targetStem) return true;
+
+        // One stem contains the other (handles prefixes)
+        if (queryStem.length >= 3 && targetStem.length >= 3) {
+            if (targetStem.includes(queryStem) || queryStem.includes(targetStem)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Check if query word matches any word in text
+    function matchesText(queryWord, text) {
+        const textWords = text.split(/\s+/);
+        return textWords.some(textWord => wordsMatch(queryWord, textWord));
+    }
+
     // DOM Elements - Action Mode
     const heroAction = document.getElementById('hero-action');
     const actionInput = document.getElementById('action-input');
@@ -30,9 +79,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // DOM Elements - Browse Mode
     const landscapeControls = document.getElementById('landscape-controls');
-    const backToSearch = document.getElementById('back-to-search');
     const expandAllBtn = document.getElementById('expand-all');
     const collapseAllBtn = document.getElementById('collapse-all');
+    const landscapeSearchInput = document.getElementById('landscape-search-input');
+    const landscapeSearchClear = document.getElementById('landscape-search-clear');
     const statsBar = document.getElementById('stats-bar');
     const landscape = document.getElementById('landscape');
     const trackButtons = document.querySelectorAll('.track-btn');
@@ -109,35 +159,35 @@ document.addEventListener('DOMContentLoaded', () => {
             score += 50;
         }
 
-        // Word-by-word matching
+        // Word-by-word matching with stem support
         for (const word of queryWords) {
             // Name matches
-            if (nameLower.includes(word)) {
+            if (matchesText(word, nameLower)) {
                 score += 15;
             }
 
             // Subcategory matches (very relevant for intent)
-            if (subcategoryLower.includes(word)) {
+            if (matchesText(word, subcategoryLower)) {
                 score += 12;
             }
 
             // Category matches
-            if (categoryLower.includes(word)) {
+            if (matchesText(word, categoryLower)) {
                 score += 8;
             }
 
             // Description matches
-            if (descLower.includes(word)) {
+            if (matchesText(word, descLower)) {
                 score += 5;
             }
         }
 
         // Boost for matching multiple words
         const matchedWords = queryWords.filter(word =>
-            nameLower.includes(word) ||
-            descLower.includes(word) ||
-            categoryLower.includes(word) ||
-            subcategoryLower.includes(word)
+            matchesText(word, nameLower) ||
+            matchesText(word, descLower) ||
+            matchesText(word, categoryLower) ||
+            matchesText(word, subcategoryLower)
         );
 
         if (matchedWords.length > 1) {
@@ -223,6 +273,11 @@ document.addEventListener('DOMContentLoaded', () => {
             statsBar.classList.add('hidden');
             landscape.classList.add('hidden');
 
+            // Clear landscape search
+            landscapeSearchQuery = '';
+            landscapeSearchInput.value = '';
+            landscapeSearchClear.classList.add('hidden');
+
             // Focus the search input
             actionInput.focus();
         } else {
@@ -282,7 +337,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (filteredSubcategories.length === 0) return null;
 
         const categoryEl = document.createElement('div');
-        categoryEl.className = 'category collapsed';
+        // Auto-expand when search is active
+        categoryEl.className = landscapeSearchQuery.trim() !== '' ? 'category' : 'category collapsed';
         categoryEl.dataset.track = track;
 
         const toolCount = filteredSubcategories.reduce((sum, sub) => sum + sub.tools.length, 0);
@@ -362,8 +418,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Filter tools based on current state (for browse mode)
     function filterTools(tools) {
         return tools.filter(tool => {
+            // Filter by type
             if (currentType !== 'all' && tool.type !== currentType) {
                 return false;
+            }
+            // Filter by landscape search query
+            if (landscapeSearchQuery.trim() !== '') {
+                const query = landscapeSearchQuery.toLowerCase();
+                const nameLower = tool.name.toLowerCase();
+                const descLower = tool.desc.toLowerCase();
+                if (!nameLower.includes(query) && !descLower.includes(query)) {
+                    return false;
+                }
             }
             return true;
         });
@@ -425,9 +491,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Browse toggle
         browseToggle.addEventListener('click', () => switchMode('browse'));
 
-        // Back to search
-        backToSearch.addEventListener('click', () => switchMode('action'));
-
         // Expand all categories
         expandAllBtn.addEventListener('click', () => {
             document.querySelectorAll('.category.collapsed').forEach(cat => {
@@ -444,6 +507,24 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             // Switch back to flex layout for uniform boxes
             landscape.classList.remove('all-expanded');
+        });
+
+        // Landscape search input
+        landscapeSearchInput.addEventListener('input', (e) => {
+            landscapeSearchQuery = e.target.value;
+            landscapeSearchClear.classList.toggle('hidden', landscapeSearchQuery === '');
+            // Use expanded layout when searching for better visibility
+            landscape.classList.toggle('all-expanded', landscapeSearchQuery.trim() !== '');
+            renderLandscape();
+        });
+
+        // Landscape search clear button
+        landscapeSearchClear.addEventListener('click', () => {
+            landscapeSearchQuery = '';
+            landscapeSearchInput.value = '';
+            landscapeSearchClear.classList.add('hidden');
+            landscape.classList.remove('all-expanded');
+            renderLandscape();
         });
 
         // Track toggle (browse mode)

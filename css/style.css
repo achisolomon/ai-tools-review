@@ -132,6 +132,11 @@ a:hover {
     font-weight: 400;
     font-size: 13px;
     color: var(--vscode-text);
+    text-decoration: none;
+}
+
+.logo:hover {
+    opacity: 0.8;
 }
 
 .logo-icon {
@@ -234,14 +239,29 @@ a:hover {
 .controls {
     max-width: 100%;
     margin: 0 auto;
-    padding: 0.35rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    background: var(--vscode-sidebar-bg);
+    border-bottom: 1px solid var(--vscode-border);
+}
+
+/* Search Row - Prominent Centered Search */
+.controls-search-row {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 1rem 0.75rem;
+    background: var(--vscode-editor-bg);
+}
+
+/* Toolbar Row - Secondary Controls */
+.controls-toolbar {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 0.5rem;
-    background: var(--vscode-sidebar-bg);
-    border-bottom: 1px solid var(--vscode-border);
+    padding: 0.35rem 0.5rem;
+    border-top: 1px solid var(--vscode-border);
 }
 
 .track-toggle {
@@ -326,6 +346,7 @@ a:hover {
     margin: 0 auto;
     padding: 0.25rem 0.5rem;
     display: flex;
+    justify-content: center;
     gap: 1rem;
     background: var(--vscode-editor-bg);
     border-bottom: 1px solid var(--vscode-border);
@@ -349,7 +370,7 @@ a:hover {
     color: var(--vscode-text-muted);
 }
 
-/* Landscape Grid - Flexbox Layout (collapsed mode) */
+/* Landscape Grid - Consistent Grid Layout for both collapsed and expanded */
 .landscape {
     max-width: 100%;
     margin: 0 auto;
@@ -358,56 +379,50 @@ a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
-    align-items: stretch;
-    align-content: flex-start;
+    justify-content: center;
+    align-items: start;
 }
 
-/* Landscape Grid - Columns Layout (expanded mode) */
+/* Category sizing - FIXED width for both collapsed and expanded */
+.landscape .category {
+    flex: 0 0 280px !important;
+    width: 280px !important;
+    min-width: 280px !important;
+    max-width: 280px !important;
+}
+
+/* Landscape Grid - Same layout when all expanded */
 .landscape.all-expanded {
-    display: block;
-    column-count: 5;
-    column-gap: 4px;
-    column-fill: balance;
+    justify-content: center;
 }
 
-/* Category Section - CNCF-Style Compact */
+/* Category Section - Base styles (width controlled by .landscape .category) */
 .category {
     background: var(--vscode-sidebar-bg);
     border: 1px solid var(--vscode-border);
     border-radius: 0;
     overflow: hidden;
-    flex: 0 0 calc(20% - 4px);
-    min-width: 200px;
-    max-width: 300px;
     transition: box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Expanded mode category styling */
-.landscape.all-expanded .category {
-    display: inline-block;
-    width: 100%;
-    margin-bottom: 4px;
-    break-inside: avoid;
-    max-width: none;
-}
-
+/* Expanded categories get shadow */
 .category:not(.collapsed) {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     z-index: 5;
-    display: block;
-    min-height: auto;
 }
 
 .category:not(.collapsed) .category-header {
-    min-height: auto;
-    align-items: center;
+    min-height: 42px;
+    align-items: flex-start;
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 
-/* Collapsed categories - uniform height (sized for 2-line titles) */
+/* Collapsed categories - same header height as expanded */
 .category.collapsed {
     min-height: 44px;
-    display: flex;
-    flex-direction: column;
 }
 
 .category.collapsed .category-header {
@@ -496,10 +511,12 @@ a:hover {
 .category-content {
     padding: 6px;
     background: var(--vscode-sidebar-bg);
-    max-height: 800px;
+    max-height: none;
     opacity: 1;
-    transition: max-height 0.3s ease, padding 0.2s ease, opacity 0.2s ease;
+    transition: padding 0.2s ease, opacity 0.2s ease;
     overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Subcategory - Compact */
@@ -736,7 +753,8 @@ a:hover {
 
 /* Footer Ad - Small inline ad */
 .footer-ad {
-    text-align: center;
+    display: flex;
+    justify-content: center;
     padding: 12px 1rem;
     background: var(--vscode-editor-bg);
 }
@@ -870,13 +888,22 @@ a:hover {
         font-size: 13px;
     }
 
-    .controls {
+    .controls-search-row {
+        padding: 0.75rem;
+    }
+
+    .controls-toolbar {
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
+        gap: 0.75rem;
         padding: 0.75rem;
     }
 
     .track-toggle {
+        justify-content: center;
+    }
+
+    .expand-collapse-btns {
         justify-content: center;
     }
 
@@ -895,6 +922,15 @@ a:hover {
         font-size: 12px;
     }
 
+    .landscape-search {
+        max-width: 100%;
+    }
+
+    .landscape-search-input {
+        font-size: 15px;
+        padding: 10px 0;
+    }
+
     .stats-bar {
         justify-content: center;
         padding: 0.75rem;
@@ -904,14 +940,11 @@ a:hover {
         padding: 0.25rem;
     }
 
-    .landscape.all-expanded {
-        column-count: 2;
-    }
-
-    .category {
-        flex: 0 0 calc(50% - 4px);
-        min-width: 150px;
-        max-width: none;
+    .landscape .category {
+        flex: 0 0 160px !important;
+        width: 160px !important;
+        min-width: 160px !important;
+        max-width: 160px !important;
     }
 
     .tools-grid {
@@ -1121,7 +1154,6 @@ a:hover {
 .expand-collapse-btns {
     display: flex;
     gap: 4px;
-    margin-right: auto;
 }
 
 .expand-btn,
@@ -1141,6 +1173,66 @@ a:hover {
     background: var(--vscode-list-hover);
     color: var(--vscode-text);
     border-color: var(--vscode-focus-border);
+}
+
+/* Landscape Search - Prominent Style */
+.landscape-search {
+    display: flex;
+    align-items: center;
+    background: var(--vscode-input-bg);
+    border: 1px solid var(--vscode-border);
+    border-radius: 8px;
+    padding: 0 16px;
+    gap: 12px;
+    width: 100%;
+    max-width: 600px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.landscape-search:focus-within {
+    border-color: var(--vscode-focus-border);
+    box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.15);
+}
+
+.landscape-search-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--vscode-text-muted);
+    flex-shrink: 0;
+}
+
+.landscape-search-input {
+    background: transparent;
+    border: none;
+    color: var(--vscode-text);
+    font-size: 16px;
+    padding: 12px 0;
+    width: 100%;
+    outline: none;
+}
+
+.landscape-search-input::placeholder {
+    color: var(--vscode-text-muted);
+}
+
+.landscape-search-clear {
+    background: none;
+    border: none;
+    color: var(--vscode-text-muted);
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+    padding: 4px;
+    flex-shrink: 0;
+    transition: color 0.15s ease;
+}
+
+.landscape-search-clear:hover {
+    color: var(--vscode-text);
+}
+
+.landscape-search-clear.hidden {
+    display: none;
 }
 
 /* Search Results Section */
@@ -1361,57 +1453,49 @@ a:hover {
 
 /* Small-medium screens (tablets) */
 @media (min-width: 769px) and (max-width: 999px) {
-    .category {
-        flex: 0 0 calc(33.333% - 4px);
-        min-width: 180px;
-    }
-    .landscape.all-expanded {
-        column-count: 3;
+    .landscape .category {
+        flex: 0 0 220px !important;
+        width: 220px !important;
+        min-width: 220px !important;
+        max-width: 220px !important;
     }
 }
 
 /* Medium screens */
 @media (min-width: 1000px) and (max-width: 1399px) {
-    .category {
-        flex: 0 0 calc(25% - 4px);
-        min-width: 200px;
-    }
-    .landscape.all-expanded {
-        column-count: 4;
+    .landscape .category {
+        flex: 0 0 260px !important;
+        width: 260px !important;
+        min-width: 260px !important;
+        max-width: 260px !important;
     }
 }
 
 /* Large screens */
 @media (min-width: 1400px) {
-    .category {
-        flex: 0 0 calc(16.666% - 4px);
-        min-width: 200px;
-        max-width: 280px;
-    }
-    .landscape.all-expanded {
-        column-count: 6;
+    .landscape .category {
+        flex: 0 0 280px !important;
+        width: 280px !important;
+        min-width: 280px !important;
+        max-width: 280px !important;
     }
 }
 
 @media (min-width: 1800px) {
-    .category {
-        flex: 0 0 calc(14.285% - 4px);
-        min-width: 200px;
-        max-width: 300px;
-    }
-    .landscape.all-expanded {
-        column-count: 7;
+    .landscape .category {
+        flex: 0 0 300px !important;
+        width: 300px !important;
+        min-width: 300px !important;
+        max-width: 300px !important;
     }
 }
 
 @media (min-width: 2200px) {
-    .category {
-        flex: 0 0 calc(12.5% - 4px);
-        min-width: 200px;
-        max-width: 320px;
-    }
-    .landscape.all-expanded {
-        column-count: 8;
+    .landscape .category {
+        flex: 0 0 320px !important;
+        width: 320px !important;
+        min-width: 320px !important;
+        max-width: 320px !important;
     }
 
     .tools-grid {
