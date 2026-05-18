@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - AI Tool Review</title>
+    <meta name="description" content="Learn about AI Tool Review - a comprehensive directory helping you find, compare, and evaluate AI tools across the rapidly expanding AI ecosystem.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Google Consent Mode - Set defaults BEFORE loading any Google scripts -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+
+        // Default: deny all until user consents
+        gtag('consent', 'default', {
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'analytics_storage': 'denied',
+            'wait_for_update': 500
+        });
+
+        // Check for existing consent
+        const savedConsent = localStorage.getItem('cookie_consent');
+        if (savedConsent === 'accepted') {
+            gtag('consent', 'update', {
+                'ad_storage': 'granted',
+                'ad_user_data': 'granted',
+                'ad_personalization': 'granted',
+                'analytics_storage': 'granted'
+            });
+        }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MZE53DJ7JP"></script>
+    <script>
+        gtag('js', new Date());
+        gtag('config', 'G-MZE53DJ7JP');
+    </script>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7272761067250869"
+        crossorigin="anonymous"></script>
+
+    <style>
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.7;
+        }
+        .about-container h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .about-container .tagline {
+            color: #888;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        .about-container h2 {
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #4a9eff;
+        }
+        .about-container h3 {
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .about-container p, .about-container li {
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+        .about-container ul {
+            padding-left: 1.5rem;
+        }
+        .about-container li {
+            margin-bottom: 0.5rem;
+        }
+        .about-container a {
+            color: #4a9eff;
+        }
+        .highlight-box {
+            background: #1a2a1a;
+            border: 1px solid #2a4a2a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .highlight-box.info {
+            background: #1a1a2a;
+            border-color: #2a2a4a;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: #4a9eff;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .category-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        .category-tag {
+            background: var(--vscode-input-bg, #3c3c3c);
+            border: 1px solid var(--vscode-border, #3c3c3c);
+            border-radius: 4px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.85rem;
+            color: var(--vscode-text, #ccc);
+        }
+        @media (max-width: 768px) {
+            .about-container {
+                padding: 1.5rem 1rem;
+            }
+            .about-container h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="about-container">
+        <a href="index.html" class="back-link">&larr; Back to AI Tool Review</a>
+
+        <h1>About AI Tool Review</h1>
+        <p class="tagline">Your guide to navigating the AI tools landscape</p>
+
+        <div class="highlight-box">
+            <strong>Our Mission:</strong> Help you find the best AI tools for your needs. Compare tools, read community reviews, and submit your own to help others make informed decisions.
+        </div>
+
+        <h2>What is AI Tool Review?</h2>
+        <p>AI Tool Review is a community-driven directory where you can discover, compare, and review AI tools. Whether you're a developer or end-user, find the right tool for your needs and share your experiences to help others.</p>
+
+        <h2>What We Offer</h2>
+        <ul>
+            <li><strong>Curated Directory:</strong> AI tools organized by category, making it easy to explore and compare options</li>
+            <li><strong>Community Reviews:</strong> Real feedback from users to help you choose the right tool</li>
+            <li><strong>Smart Search:</strong> Describe what you want to build and find relevant tools instantly</li>
+            <li><strong>Open Source Visibility:</strong> Easily identify open source vs. commercial tools with clear badges</li>
+        </ul>
+
+        <h2>Categories We Cover</h2>
+        <p>Our directory spans the full AI landscape, including:</p>
+
+        <div class="category-list">
+            <span class="category-tag">Foundation Models</span>
+            <span class="category-tag">Coding Assistants</span>
+            <span class="category-tag">AI Agents</span>
+            <span class="category-tag">AI Infrastructure</span>
+            <span class="category-tag">Vector Databases</span>
+            <span class="category-tag">LLM Observability</span>
+            <span class="category-tag">Image Generation</span>
+            <span class="category-tag">Voice & Audio</span>
+            <span class="category-tag">AI Writing Tools</span>
+            <span class="category-tag">Prompt Engineering</span>
+            <span class="category-tag">RAG Frameworks</span>
+            <span class="category-tag">Model Fine-tuning</span>
+            <span class="category-tag">And more...</span>
+        </div>
+
+        <h2>How We Curate</h2>
+        <p>AI Tool Review is a community-curated directory. Our selection process focuses on:</p>
+        <ul>
+            <li><strong>Relevance:</strong> Tools that solve real problems in the AI space</li>
+            <li><strong>Quality:</strong> Established tools with active development and community support</li>
+            <li><strong>Diversity:</strong> Representing both open source projects and commercial offerings</li>
+            <li><strong>Accessibility:</strong> Including tools for various skill levels and use cases</li>
+        </ul>
+
+        <div class="highlight-box info">
+            <strong>Have a tool to suggest?</strong> We're always looking to expand our directory with quality AI tools. If you know of a tool that should be included, reach out to us!
+        </div>
+
+        <h2>Who We're For</h2>
+        <p>AI Tool Review serves a diverse audience:</p>
+        <ul>
+            <li><strong>Developers:</strong> Building AI-powered applications and looking for the right infrastructure, frameworks, and APIs</li>
+            <li><strong>Product Teams:</strong> Evaluating AI tools to integrate into their products</li>
+            <li><strong>Researchers:</strong> Exploring the landscape of available AI tools and models</li>
+            <li><strong>Enthusiasts:</strong> Anyone curious about what's possible with AI today</li>
+        </ul>
+
+        <p style="margin-top: 2rem; text-align: center; color: #666;">
+            <a href="index.html">&larr; Back to AI Tool Review</a>
+        </p>
+    </div>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent" class="cookie-banner" style="display: none;">
+        <div class="cookie-content">
+            <p>We use cookies for analytics and personalized ads. By clicking "Accept", you consent to our use of cookies. <a href="privacy.html">Privacy Policy</a></p>
+            <div class="cookie-buttons">
+                <button id="cookie-reject" class="cookie-btn cookie-btn-secondary">Reject</button>
+                <button id="cookie-accept" class="cookie-btn cookie-btn-primary">Accept</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cookie Consent Handler
+        (function() {
+            const banner = document.getElementById('cookie-consent');
+            const acceptBtn = document.getElementById('cookie-accept');
+            const rejectBtn = document.getElementById('cookie-reject');
+
+            // Show banner if no consent saved
+            if (!localStorage.getItem('cookie_consent')) {
+                banner.style.display = 'block';
+            }
+
+            acceptBtn.addEventListener('click', function() {
+                localStorage.setItem('cookie_consent', 'accepted');
+                banner.style.display = 'none';
+
+                // Update Google Consent Mode
+                gtag('consent', 'update', {
+                    'ad_storage': 'granted',
+                    'ad_user_data': 'granted',
+                    'ad_personalization': 'granted',
+                    'analytics_storage': 'granted'
+                });
+            });
+
+            rejectBtn.addEventListener('click', function() {
+                localStorage.setItem('cookie_consent', 'rejected');
+                banner.style.display = 'none';
+
+                // Keep consent denied (already default)
+                gtag('consent', 'update', {
+                    'ad_storage': 'denied',
+                    'ad_user_data': 'denied',
+                    'ad_personalization': 'denied',
+                    'analytics_storage': 'denied'
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
