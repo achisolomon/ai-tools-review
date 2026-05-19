@@ -451,9 +451,73 @@ a:hover {
     max-width: 280px !important;
 }
 
-/* Landscape Grid - Same layout when all expanded */
+/* Landscape Grid - Compact centered layout when all expanded or searching */
 .landscape.all-expanded {
-    justify-content: center;
+    /* Use inline-flex wrapper technique for true centering */
+    display: block;
+    text-align: center;
+    padding: 0.5rem 0.25rem;
+}
+
+.landscape.all-expanded .category {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: top;
+    margin: 2px;
+    flex: 0 0 220px !important;
+    width: 220px !important;
+    min-width: 220px !important;
+    max-width: 220px !important;
+}
+
+/* Even more compact when filtering - smaller cards */
+.landscape.compact-filter {
+    display: block;
+    text-align: center;
+    padding: 0.5rem 0.25rem;
+}
+
+.landscape.compact-filter .category {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: top;
+    margin: 2px;
+    flex: 0 0 200px !important;
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+}
+
+.landscape.compact-filter .tool-card {
+    min-height: 50px;
+    padding: 3px;
+}
+
+.landscape.compact-filter .tool-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.landscape.compact-filter .tool-icon img {
+    width: 18px;
+    height: 18px;
+}
+
+.landscape.compact-filter .tool-name {
+    font-size: 7px;
+}
+
+.landscape.compact-filter .subcategory-title {
+    font-size: 8px;
+}
+
+.landscape.compact-filter .category-title {
+    font-size: 10px;
+}
+
+.landscape.compact-filter .tools-grid {
+    grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
+    gap: 2px;
 }
 
 /* Category Section - Base styles (width controlled by .landscape .category) */
@@ -1007,6 +1071,14 @@ a:hover {
         max-width: 160px !important;
     }
 
+    .landscape.compact-filter .category,
+    .landscape.all-expanded .category {
+        flex: 0 0 140px !important;
+        width: 140px !important;
+        min-width: 140px !important;
+        max-width: 140px !important;
+    }
+
     .tools-grid {
         grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
         gap: 2px;
@@ -1045,6 +1117,10 @@ a:hover {
 
     .category.collapsed .category-header {
         min-height: 36px;
+    }
+
+    .landscape.compact-filter .tools-grid {
+        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
     }
 }
 
@@ -1528,6 +1604,14 @@ a:hover {
         min-width: 220px !important;
         max-width: 220px !important;
     }
+
+    .landscape.compact-filter .category,
+    .landscape.all-expanded .category {
+        flex: 0 0 180px !important;
+        width: 180px !important;
+        min-width: 180px !important;
+        max-width: 180px !important;
+    }
 }
 
 /* Medium screens */
@@ -1537,6 +1621,14 @@ a:hover {
         width: 260px !important;
         min-width: 260px !important;
         max-width: 260px !important;
+    }
+
+    .landscape.compact-filter .category,
+    .landscape.all-expanded .category {
+        flex: 0 0 200px !important;
+        width: 200px !important;
+        min-width: 200px !important;
+        max-width: 200px !important;
     }
 }
 
@@ -1548,6 +1640,14 @@ a:hover {
         min-width: 280px !important;
         max-width: 280px !important;
     }
+
+    .landscape.compact-filter .category,
+    .landscape.all-expanded .category {
+        flex: 0 0 220px !important;
+        width: 220px !important;
+        min-width: 220px !important;
+        max-width: 220px !important;
+    }
 }
 
 @media (min-width: 1800px) {
@@ -1556,6 +1656,14 @@ a:hover {
         width: 300px !important;
         min-width: 300px !important;
         max-width: 300px !important;
+    }
+
+    .landscape.compact-filter .category,
+    .landscape.all-expanded .category {
+        flex: 0 0 240px !important;
+        width: 240px !important;
+        min-width: 240px !important;
+        max-width: 240px !important;
     }
 }
 
@@ -1569,6 +1677,14 @@ a:hover {
 
     .tools-grid {
         grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+    }
+
+    .landscape.compact-filter .category,
+    .landscape.all-expanded .category {
+        flex: 0 0 260px !important;
+        width: 260px !important;
+        min-width: 260px !important;
+        max-width: 260px !important;
     }
 }
 
